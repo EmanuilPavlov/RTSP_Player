@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RTSP_Player</string>
+    <string name="media_url_rtsp">rtsp://your.rtsp.stream/url</string>
+</resources>
