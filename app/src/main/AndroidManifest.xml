@@ -16,6 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.RTSP_Player">
         <activity
+                android:configChanges="orientation|screenSize|keyboardHidden"
                 android:name=".MainActivity"
                 android:exported="true">
             <intent-filter>

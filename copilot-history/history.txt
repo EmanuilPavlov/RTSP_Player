@@ -1,3 +1,4 @@
+📅 Friday, October 10 - 2025
 Cannot infer type for type parameter 'T'. Specify it explicitly. Unresolved reference 'ActivityPlayerBinding'.
 
 The errors are due to missing import and incorrect view binding class name. You need to:
@@ -177,3 +178,101 @@ To add a button that toggles the visibility of a SeekBar for audio control, plac
 did exoplayer provide audio bar component
 
 ExoPlayer does not provide a built-in audio (volume) bar component in its default UI. The provided `PlayerView` or `StyledPlayerView` includes playback controls (play, pause, seek, etc.), but not a volume slider. You need to implement a custom `SeekBar` for audio control in your layout and connect it to the player's volume property in your code.
+
+📅 Saturday, October 11 - 2025
+
+why does my fullscreen toggle only work after the second try
+
+The fullscreen toggle only works after the second try because the `originalVideoHeight` is set asynchronously in an `OnGlobalLayoutListener`. On the first toggle, `originalVideoHeight` may still be `0`, so the height fallback is used. On the second try, the layout has updated and `originalVideoHeight` is set, so it works as expected.
+
+**Solution:**
+Move the fullscreen toggle logic to run only after `originalVideoHeight` is set, or ensure it is initialized before toggling fullscreen. For example, set `originalVideoHeight` in `onCreate` after the layout is inflated, or use a default value if it's still `0`.
+
+why the controllers are disappearing while i am interacting with them
+
+The controllers disappear while interacting because ExoPlayer's default controller has an auto-hide timeout. When you interact with custom controls (like volume or fullscreen), the controller may hide itself after the timeout, even if you are still using a control.
+
+**Solution:**
+Disable the auto-hide feature or reset the controller timeout when interacting. If using `PlayerView`, call `showController()` whenever you interact with a control, or set `controllerShowTimeoutMs` to `0` to keep it always visible:
+
+```kotlin
+viewBinding.videoView.controllerShowTimeoutMs = 0 // Keeps controller always visible
+```
+
+Or, call:
+
+```kotlin
+viewBinding.videoView.showController()
+```
+
+after each interaction to reset the timeout.
+
+i still have the same problem what else i can do
+
+The fullscreen toggle issue persists because `originalVideoHeight` may not be set when you exit fullscreen. To fix this, ensure `originalVideoHeight` is initialized before toggling, or always use a fallback height if it's zero.
+
+**Solution:**
+Set `originalVideoHeight` immediately after layout inflation in `onCreate`, or use a default height if it's not set.
+
+Example adjustment:
+
+```kotlin
+// In onCreate, after setContentView(viewBinding.root)
+originalVideoHeight = viewBinding.videoView.height
+if (originalVideoHeight == 0) {
+    // Fallback to a default height if not set
+    originalVideoHeight = (200 * resources.displayMetrics.density).toInt()
+}
+```
+
+This ensures `originalVideoHeight` is always set before fullscreen toggling.
+
+i mean i have problem with my controllers they still disappear after i interact with them
+
+The issue is that ExoPlayer's controller auto-hides after a timeout, even when interacting with custom controls. To fix this, reset the controller timeout or keep it always visible when interacting.
+
+**Solution:**
+Call `showController()` after any interaction with your custom controls (e.g., play/pause, volume, fullscreen). This resets the auto-hide timer.
+
+Example adjustment in your `setupCustomControls()`:
+
+```kotlin
+// After each interaction, add this line:
+viewBinding.videoView.showController()
+```
+
+For example:
+
+```kotlin
+playButton.setOnClickListener {
+    player?.play()
+    playButton.visibility = View.INVISIBLE
+    pauseButton.visibility = View.VISIBLE
+    viewBinding.videoView.showController()
+}
+
+pauseButton.setOnClickListener {
+    player?.pause()
+    playButton.visibility = View.VISIBLE
+    pauseButton.visibility = View.INVISIBLE
+    viewBinding.videoView.showController()
+}
+
+volumeButton.setOnClickListener {
+    volumeSlider.visibility = if (volumeSlider.isGone) View.VISIBLE else View.GONE
+    viewBinding.videoView.showController()
+}
+
+volumeSlider.addOnChangeListener { _, value, _ ->
+    player?.volume = value
+    viewBinding.videoView.showController()
+}
+
+fullScreenButton.setOnClickListener {
+    // ... your fullscreen logic ...
+    viewBinding.videoView.showController()
+}
+```
+
+This ensures the controller stays visible while you interact.
+
