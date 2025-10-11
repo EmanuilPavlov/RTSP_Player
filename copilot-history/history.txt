@@ -276,3 +276,47 @@ fullScreenButton.setOnClickListener {
 
 This ensures the controller stays visible while you interact.
 
+what slider listener i can use for volume control
+
+For volume control with a Material `Slider`, use `addOnChangeListener`. This listener provides the slider value and a `fromUser` flag to check if the change was user-initiated.
+
+Example:
+
+```kotlin
+volumeSlider.addOnChangeListener { slider, value, fromUser ->
+    if (fromUser) {
+        audioManager?.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            value.toInt(),
+            0
+        )
+    }
+}
+```
+
+This updates the volume only when the user moves the slider.
+
+how to let phone rotation on full screen
+
+To allow phone rotation only in fullscreen, set the orientation to `SCREEN_ORIENTATION_SENSOR_LANDSCAPE` when entering fullscreen, and lock to portrait (`SCREEN_ORIENTATION_PORTRAIT`) when exiting.
+
+**Adjustment for fullscreen toggle:**
+
+```kotlin
+fullScreenButton.setOnClickListener {
+    if (!isFullScreen) {
+        // Enable sensor-based landscape rotation in fullscreen
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+        // ... other fullscreen logic ...
+    } else {
+        // Lock to portrait when exiting fullscreen
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        // ... other exit fullscreen logic ...
+    }
+    isFullScreen = !isFullScreen
+    viewBinding.videoView.showController()
+}
+```
+
+This lets the phone rotate between landscape modes only while in fullscreen.
+

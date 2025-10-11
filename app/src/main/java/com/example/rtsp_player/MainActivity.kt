@@ -1,6 +1,7 @@
 package com.example.rtsp_player
 
 import android.content.pm.ActivityInfo
+import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -21,6 +22,7 @@ import androidx.core.view.isGone
 class MainActivity : AppCompatActivity() {
 
     private var player: ExoPlayer? = null
+    private var audioManager: AudioManager? = null
     private var playWhenReady = true
     private var isFullScreen = false
     private var currentItem = 0
@@ -96,10 +98,23 @@ class MainActivity : AppCompatActivity() {
             }
             viewBinding.videoView.showController()
         }
+        // --- Volume slider setup ---
+        audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        val maxVolume = audioManager?.getStreamMaxVolume(AudioManager.STREAM_MUSIC) ?: 0
+        val currentVolume = audioManager?.getStreamVolume(AudioManager.STREAM_MUSIC) ?: 0
+        volumeSlider.valueFrom = 0f
+        volumeSlider.valueTo = maxVolume.toFloat()
+        volumeSlider.value = currentVolume.toFloat()
 
         // --- Volume slider handling ---
-        volumeSlider.addOnChangeListener { _, value, _ ->
-            player?.volume = value
+        volumeSlider.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                audioManager?.setStreamVolume(
+                    AudioManager.STREAM_MUSIC,
+                    value.toInt(),
+                    0
+                )
+            }
             viewBinding.videoView.showController()
         }
 
@@ -114,7 +129,7 @@ class MainActivity : AppCompatActivity() {
                                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         )
                 supportActionBar?.hide()
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
 
                 viewBinding.videoView.animate().scaleX(1f).scaleY(1f).duration = 300
                 val params = viewBinding.videoView.layoutParams
