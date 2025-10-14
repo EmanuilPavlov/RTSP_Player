@@ -55,7 +55,7 @@
                 android:value="10"
                 android:valueFrom="0"
                 android:valueTo="15"
-                app:stepSize="1"/>
+                />
 
     </FrameLayout>
 

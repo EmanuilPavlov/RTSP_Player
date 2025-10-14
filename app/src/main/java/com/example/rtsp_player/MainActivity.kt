@@ -293,7 +293,7 @@ class MainActivity : AppCompatActivity() {
         val controls = findViewById<View>(R.id.controller_container)
         controls?.visibility = View.VISIBLE
         controls?.removeCallbacks(hideControlsRunnable)
-        controls?.postDelayed(hideControlsRunnable, 3000)
+        controls?.postDelayed(hideControlsRunnable, 5000)
     }
 
 
