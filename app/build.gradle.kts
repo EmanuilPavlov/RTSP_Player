@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "com.example.rtsp_player"
-    compileSdk = 36
+    compileSdk = 36  // Changed to stable version
 
     defaultConfig {
         applicationId = "com.example.rtsp_player"
-        minSdk = 27
+        minSdk = 21   // VLC requires min 21
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -24,35 +24,28 @@ android {
         }
     }
 
-    // Enable view binding
     buildFeatures {
         viewBinding = true
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
 }
 
-val mediaVersion = "1.8.0"
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.17.0")
-    implementation("androidx.appcompat:appcompat:1.7.1")
-    implementation("com.google.android.material:material:1.13.0")
-    implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    // ExoPlayer for RTSP
-    implementation("androidx.media3:media3-exoplayer-rtsp:${mediaVersion}")
-    implementation("androidx.media3:media3-exoplayer:${mediaVersion}")
-    implementation("androidx.media3:media3-ui:${mediaVersion}")
-    implementation("androidx.media3:media3-exoplayer-dash:${mediaVersion}")
-
+    // VLC Android Player
+    implementation("androidx.media3:media3-ui:1.2.1")
+    implementation("org.videolan.android:libvlc-all:3.6.0")  // Use stable version
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

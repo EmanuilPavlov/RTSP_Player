@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">RTSP_Player</string>
-    <string name="media_url_rtsp">rtsp://170.93.143.139/rtplive/470011e600ef003a004ee33696235daa</string>
+    <string name="media_url_rtsp">rtsp://dev.gradotech.eu:8554/stream</string>
 </resources>
