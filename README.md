@@ -43,7 +43,7 @@ Libraries:
   LibVLC – RTSP playback
   AndroidX libraries (AppCompat, Material Components, ViewBinding)
 
-🖥️ Usage
+## 🖥️ Usage
 
   Tap the Play button ▶️ to start streaming.
   Tap Pause ⏸️ to pause playback.
@@ -51,7 +51,7 @@ Libraries:
   Tap the Fullscreen button ⛶ to toggle immersive mode.
   Tap on the video surface to show/hide the custom overlay controls.
 
-🚀 Installation
+## 🚀 Installation
 Clone the repository:
 
 bash
