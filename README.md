@@ -35,6 +35,8 @@ RTSP_Player/
  ├── settings.gradle
  └── README.md
 
+---
+
 🛠️ Tech Stack
 Language: Kotlin
 
@@ -43,6 +45,8 @@ Libraries:
   LibVLC – RTSP playback
   AndroidX libraries (AppCompat, Material Components, ViewBinding)
 
+---
+
 ## 🖥️ Usage
 
   Tap the Play button ▶️ to start streaming.
@@ -50,6 +54,8 @@ Libraries:
   Use the Volume button 🔊 to show/hide the slider and adjust system volume.
   Tap the Fullscreen button ⛶ to toggle immersive mode.
   Tap on the video surface to show/hide the custom overlay controls.
+
+---
 
 ## 🚀 Installation
 Clone the repository:
