@@ -1,26 +1,25 @@
-# 📺 RTSP Player (Android)
+📱 RTSP Player (Android)
+An Android application for streaming and controlling RTSP feeds using LibVLC. This project demonstrates how to build a custom video player with custom overlay controls, volume management, fullscreen toggle, and audio focus handling.
 
-An Android application for streaming and controlling RTSP feeds using **LibVLC**.  
-This project demonstrates how to build a custom video player with **custom overlay controls**, **volume management**, **fullscreen toggle**, and **audio focus handling**.
+✨ Features
+🎥 RTSP Playback – Play live RTSP streams with low latency
 
----
+🎛️ Custom Overlay Controls – Play, pause, fullscreen toggle, and volume slider
 
-## ✨ Features
+🔊 Audio Focus Handling – Integrates with Android's audio system for smooth playback
 
-- 🎥 **RTSP Playback** – play live RTSP streams with low latency
-- 🎛️ **Custom Overlay Controls** – play, pause, fullscreen toggle, and volume slider
-- 🔊 **Audio Focus Handling** – integrates with Android’s audio system for smooth playback
-- 📱 **Fullscreen Mode** – immersive video playback with system bars hidden
-- 🔄 **Rotation Support** – preserves aspect ratio when rotating device, no stretching
-- ⏱️ **Auto‑Hide Controls** – overlay disappears after a timeout and reappears on tap
-- ⚡ **Optimized VLC Options** – network caching, hardware decoding, and audio resampling
-- 🐞 **Lifecycle Management** – proper cleanup of VLC resources
+📱 Fullscreen Mode – Immersive video playback with system bars hidden
 
----
+🔄 Rotation Support – Preserves aspect ratio when rotating device, no stretching
 
-## 📂 Project Structure
+⏱️ Auto-Hide Controls – Overlay disappears after a timeout and reappears on tap
 
-```plaintext
+⚡ Optimized VLC Options – Network caching, hardware decoding, and audio resampling
+
+🐞 Lifecycle Management – Proper cleanup of VLC resources
+
+📂 Project Structure
+text
 RTSP_Player/
  ├── app/
  │   ├── java/com/example/rtsp_player/
@@ -34,40 +33,37 @@ RTSP_Player/
  ├── build.gradle
  ├── settings.gradle
  └── README.md
-
----
-
 🛠️ Tech Stack
 Language: Kotlin
 
 Libraries:
 
-  LibVLC – RTSP playback
-  AndroidX libraries (AppCompat, Material Components, ViewBinding)
+LibVLC – RTSP playback
 
----
+AndroidX libraries (AppCompat, Material Components, ViewBinding)
 
-## 🖥️ Usage
+🖥️ Usage
+Tap the Play button ▶️ to start streaming
 
-  Tap the Play button ▶️ to start streaming.
-  Tap Pause ⏸️ to pause playback.
-  Use the Volume button 🔊 to show/hide the slider and adjust system volume.
-  Tap the Fullscreen button ⛶ to toggle immersive mode.
-  Tap on the video surface to show/hide the custom overlay controls.
+Tap Pause ⏸️ to pause playback
 
----
+Use the Volume button 🔊 to show/hide the slider and adjust system volume
 
-## 🚀 Installation
+Tap the Fullscreen button ⛶ to toggle immersive mode
+
+Tap on the video surface to show/hide the custom overlay controls
+
+🚀 Installation
 Clone the repository:
 
 bash
 git clone https://github.com/your-username/RTSP_Player.git
-Open the project in Android Studio.
+Open the project in Android Studio
 
-Sync Gradle dependencies.
+Sync Gradle dependencies
 
 Add your RTSP URL in res/values/strings.xml:
-  xml
-  <string name="media_url_rtsp">rtsp://username:password@ip_address:port/stream</string>
 
-Run the app on a physical device (recommended).
+xml
+<string name="media_url_rtsp">rtsp://username:password@ip_address:port/stream</string>
+Run the app on a physical device (recommended)
